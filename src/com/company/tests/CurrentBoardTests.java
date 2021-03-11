@@ -1,7 +1,9 @@
 package com.company.tests;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
+import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -48,6 +50,45 @@ public class CurrentBoardTests extends TestBase{
         submitButton.click();
         WebElement cancelEditList = driver.findElement(By.cssSelector(".js-cancel-edit"));
         cancelEditList.click();
+    }
+
+    @Test
+    public void changeListName() throws InterruptedException {
+        WebElement addList = driver.findElement(By.xpath("//span[@class='placeholder']"));
+        //----- If no list (name of the button is 'Add a list'), create the new list ----
+        if(addList.getText().equals("Add a list")){
+            addList.click();
+            WebElement newNameList = driver.findElement(By.cssSelector("input[name='name']"));
+            fillField(newNameList,"test");
+            WebElement saveList = driver.findElement(By.cssSelector("input.js-save-edit"));
+            saveList.click();
+            Thread.sleep(2000);
+            WebElement cancelEditList = driver.findElement(By.cssSelector(".js-cancel-edit"));
+            cancelEditList.click();
+            Thread.sleep(2000);
+        }
+        // ----- Define the index of the last list --------------
+        int lastList = driver.findElements(By.cssSelector(".list-header")).size()-1;
+
+        //-------- Click on the header--------------
+        WebElement lastHeader = driver.findElements(By.cssSelector(".list-header")).get(lastList);
+
+        lastHeader.click();
+        Thread.sleep(2000);
+
+        //------- Change the header -----------------
+        String newHeader = "newHeader1";
+        WebElement lastNameList = driver.findElements(By.cssSelector(".js-list-name-input")).get(lastList);
+        lastNameList.sendKeys(newHeader);
+        Thread.sleep(2000);
+        lastNameList.sendKeys(Keys.ENTER);
+        Thread.sleep(2000);
+        driver.navigate().refresh();
+        Thread.sleep(2000);
+
+        lastHeader = driver.findElements(By.cssSelector(".list-header")).get(lastList);
+
+        Assert.assertEquals(lastHeader.getText(), newHeader);
     }
 
 
