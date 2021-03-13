@@ -17,7 +17,12 @@ public class LoginTests extends TestBase{
         // ---------Press login button  ---
         WebElement loginIcon = driver.findElement(By.xpath("//a[contains(text(),'Log in')]"));
         loginIcon.click();
-        Thread.sleep(7000);
+        //Thread.sleep(7000);
+        //waitUntilElementIsClickable(By.id("login"),15);
+        waitUntilElementIsClickable(By.id("user"),10);
+        waitUntilElementIsClickable(By.id("login"),20);
+
+
     }
 
     @Test
@@ -25,13 +30,17 @@ public class LoginTests extends TestBase{
         // -------- Enter login/password -------------
         WebElement loginField = driver.findElement(By.id("user"));
         fillField(loginField,"123");
+        waitUntilElementIsClickable(By.id("password"),10);
         WebElement passwordField = driver.findElement(By.id("password"));
         fillField(passwordField,"pass");
-        Thread.sleep(3000);
+        //to be sure that loginField and passwordField are already filled in
+        Thread.sleep(1000);
 
         // -------- Click login button ------------
+        waitUntilElementIsClickable(By.id("login"),20);
         driver.findElement(By.id("login")).click();
-        Thread.sleep(3000);
+        //Thread.sleep(3000);
+        waitUntilElementIsVisible(By.cssSelector("#error >.error-message"),20);
 
         // --------- Print error message ----------
         WebElement errorMessage = driver.findElement(By.cssSelector("#error >.error-message"));
@@ -47,18 +56,22 @@ public class LoginTests extends TestBase{
         //---- Fill in login-field and press "login with Attlassian"----
         WebElement loginField = driver.findElement(By.id("user"));
         fillField(loginField,"marinaqatest2019@gmail.com");
-        Thread.sleep(2000);
+        //Thread.sleep(2000);
+        waitUntilElementIsClickable(By.xpath("//input[@value = 'Log in with Atlassian']"),10);
         driver.findElement(By.id("login")).click();
-        Thread.sleep(2000);
+        //Thread.sleep(2000);
+        waitUntilElementIsClickable(By.id("password"),10);
 
         //----- Fill in password field and press login-submit button-----------
         driver.findElement(By.id("password")).click();
         driver.findElement(By.id("password")).sendKeys("marinaqa");
-        Thread.sleep(2000);
+        //Thread.sleep(2000);
+        waitUntilElementIsClickable(By.id("login-submit"),10);
         driver.findElement(By.id("login-submit")).click();
 
         //------Wait the Home page loading and print 'Boards' button -------
-        Thread.sleep(20000);
+        //Thread.sleep(20000);
+        waitUntilElementIsClickable(By.xpath("//button[@aria-label = 'Open Boards Menu']"),10);
         System.out.println("Name of the button 'Boards': " + driver
                 .findElement(By.xpath("//button[@aria-label = 'Open Boards Menu']")).getText());
     }

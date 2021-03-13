@@ -82,7 +82,7 @@ public class CurrentBoardTests extends TestBase{
         lastNameList.sendKeys(newHeader);
         Thread.sleep(2000);
         lastNameList.sendKeys(Keys.ENTER);
-        Thread.sleep(2000);
+        Thread.sleep(4000);
         driver.navigate().refresh();
         Thread.sleep(2000);
 
