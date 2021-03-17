@@ -1,6 +1,7 @@
 package com.company.tests;
 
 
+import com.company.helpers.LoginPageHelper;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -11,29 +12,29 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import java.util.concurrent.TimeUnit;
+
 public class LoginTests extends TestBase{
+    LoginPageHelper loginPage;
+
     @BeforeMethod
     public void initTests() throws InterruptedException {
         // ---------Press login button  ---
-        WebElement loginIcon = driver.findElement(By.xpath("//a[contains(text(),'Log in')]"));
-        loginIcon.click();
-        //waitUntilElementIsClickable(By.id("login"),15);
-        waitUntilElementIsClickable(By.id("user"),10);
-        waitUntilElementIsClickable(By.id("login"),20);
-
-
+        loginPage = new LoginPageHelper(driver);
+        loginPage.openLoginPage();
+        loginPage.waitUntilPageIsLoaded();
     }
 
     @Test
     public void loginNegativeLoginIncorrect() throws InterruptedException {
         // -------- Enter login/password -------------
-        WebElement loginField = driver.findElement(By.id("user"));
-        fillField(loginField,"123");
-        waitUntilElementIsClickable(By.id("password"),10);
-        WebElement passwordField = driver.findElement(By.id("password"));
-        fillField(passwordField,"pass");
+        loginPage.enterLoginNotAttl("123");
+        loginPage.enterPasswordNotAttl("pass");
+
+
         //to be sure that loginField and passwordField are already filled in
         Thread.sleep(1000);
+        //driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 
         // -------- Click login button ------------
         waitUntilElementIsClickable(By.id("login"),20);

@@ -1,5 +1,6 @@
 package com.company.tests;
 
+import com.company.helpers.HomePageHelper;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -12,17 +13,19 @@ import org.testng.annotations.BeforeMethod;
 
 public class TestBase {
     WebDriver driver;
+    HomePageHelper homePage;
 
     @BeforeMethod
     public void startAppl() throws InterruptedException {
         driver = new ChromeDriver();
+        homePage = new HomePageHelper(driver);
         //----Driver initialization. Open Trello application
         //ChromeOptions options = new ChromeOptions();
         //options.addArguments("--lang=" + "rus");
         //driver = new ChromeDriver(options);
         driver.get("https://trello.com/");
-        //Thread.sleep(5000);
-        waitUntilElementIsClickable(By.xpath("//a[contains(text(),'Log in')]"),40);
+        homePage.waitUntilPageIsLoaded();
+
     }
 
 
