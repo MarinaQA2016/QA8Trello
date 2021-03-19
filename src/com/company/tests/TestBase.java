@@ -14,6 +14,8 @@ import org.testng.annotations.BeforeMethod;
 public class TestBase {
     WebDriver driver;
     HomePageHelper homePage;
+    public static final String LOGIN = "marinaqatest2019@gmail.com";
+    public static final String PASSWORD = "marinaqa";
 
     @BeforeMethod
     public void startAppl() throws InterruptedException {

@@ -13,7 +13,9 @@ public class HomePageHelper extends PageBase{
     }
 
     public void waitUntilPageIsLoaded() {
-        waitUntilElementIsClickable(By.xpath("//a[contains(text(),'Log in')]"),40);
+
+        waitUntilElementIsClickable(By
+                .xpath("//a[contains(text(),'Log in')]"),40);
     }
 
     public String getPageTitle(){
