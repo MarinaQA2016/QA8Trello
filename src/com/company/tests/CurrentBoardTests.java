@@ -33,9 +33,9 @@ public class CurrentBoardTests extends TestBase{
 
         //------Wait the Home page loading and print 'Boards' button -------
         //Thread.sleep(20000);
-        waitUntilElementIsClickable(By.xpath("//button[@aria-label = 'Open Boards Menu']"),10);
+        waitUntilElementIsClickable(By.xpath("//button[@aria-label = 'Open boards menu']"),10);
         System.out.println("Name of the button 'Boards': " + driver
-                .findElement(By.xpath("//button[@aria-label = 'Open Boards Menu']")).getText());
+                .findElement(By.xpath("//button[@aria-label = 'Open boards menu']")).getText());
 
         //----Open QA Haifa8 board ----
         WebElement qaHaifa8Board = driver.findElement(By

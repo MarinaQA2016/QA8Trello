@@ -22,6 +22,5 @@ public class BoardsPageHelper extends PageBase{
         WebElement boardsButton = driver.findElement(By
                 .xpath("//button[@aria-label = 'Open boards menu']"));
         return boardsButton.getText();
-
     }
 }
