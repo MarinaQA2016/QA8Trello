@@ -19,6 +19,14 @@ public class PageBase {
             e.printStackTrace();
         }
     }
+    public void waitUntilElementIsClickable(WebElement element, int time) {
+        try {
+            new WebDriverWait(driver, time).until(ExpectedConditions
+                    .elementToBeClickable(element));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
     public void waitUntilElementIsPresent(By locator, int time) {
 
         try {
@@ -49,6 +57,14 @@ public class PageBase {
 
         try {
             new WebDriverWait(driver, time).until(ExpectedConditions.visibilityOfElementLocated(locator));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    public void waitUntilElementIsVisible(WebElement element, int time) {
+
+        try {
+            new WebDriverWait(driver, time).until(ExpectedConditions.visibilityOf(element));
         } catch (Exception e) {
             e.printStackTrace();
         }

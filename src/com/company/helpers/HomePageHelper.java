@@ -2,10 +2,14 @@ package com.company.helpers;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class HomePageHelper extends PageBase{
+    @FindBy(xpath = "//a[contains(text(),'Log in')]")
+    WebElement logInIcon;
 
 
     public HomePageHelper(WebDriver driver) {
@@ -13,9 +17,7 @@ public class HomePageHelper extends PageBase{
     }
 
     public void waitUntilPageIsLoaded() {
-
-        waitUntilElementIsClickable(By
-                .xpath("//a[contains(text(),'Log in')]"),40);
+        waitUntilElementIsClickable(logInIcon,40);
     }
 
     public String getPageTitle(){

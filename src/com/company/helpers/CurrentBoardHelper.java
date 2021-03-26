@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.PageFactory;
 
 public class CurrentBoardHelper extends PageBase{
     String boardName;
@@ -11,6 +12,7 @@ public class CurrentBoardHelper extends PageBase{
     public CurrentBoardHelper(WebDriver driver, String boardName) {
         super(driver);
         this.boardName = boardName;
+        PageFactory.initElements(driver,this);
     }
 
     public void openCurrentBoardPage(){
