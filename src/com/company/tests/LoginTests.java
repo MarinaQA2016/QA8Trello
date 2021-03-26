@@ -10,14 +10,12 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 public class LoginTests extends TestBase{
-
     LoginPageHelper loginPage;
     BoardsPageHelper boardsPage;
 
 
     @BeforeMethod
     public void initTests() throws InterruptedException {
-        // ---------Press login button  ---
         loginPage = new LoginPageHelper(driver);
         boardsPage = new BoardsPageHelper(driver);
         loginPage.openLoginPage();

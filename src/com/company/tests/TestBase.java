@@ -37,53 +37,6 @@ public class TestBase {
         driver.quit();
     }
 
-    public void waitUntilElementIsClickable(By locator, int time) {
 
-        try {
-            new WebDriverWait(driver, time).until(ExpectedConditions.elementToBeClickable(locator));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
 
-    }
-    public void waitUntilElementIsPresent(By locator, int time) {
-
-        try {
-            new WebDriverWait(driver, time).until(ExpectedConditions.presenceOfElementLocated(locator));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void waitUntilElementDisappears(By locator, int time) {
-
-        try {
-            new WebDriverWait(driver, time).until(ExpectedConditions.invisibilityOfElementLocated(locator));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void waitUntilAllElementsArePresent(By locator, int time) {
-
-        try {
-            new WebDriverWait(driver, time).until(ExpectedConditions.presenceOfAllElementsLocatedBy(locator));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-    public void waitUntilElementIsVisible(By locator, int time) {
-
-        try {
-            new WebDriverWait(driver, time).until(ExpectedConditions.visibilityOfElementLocated(locator));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void fillField(WebElement element, String value) {
-        element.clear();
-        element.click();
-        element.sendKeys(value);
-    }
 }
