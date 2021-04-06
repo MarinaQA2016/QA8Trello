@@ -4,9 +4,39 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import java.util.List;
+
 public class CurrentBoardHelper extends PageBase{
+    @FindBy(css = ".mod-show-menu")
+    WebElement showMenuIcon;
+    @FindBy(css = ".list-header")
+    List<WebElement> listHeaderLists;
+    @FindBy(xpath = "//span[@class='placeholder']/..")
+    WebElement addListButton;
+    @FindBy(xpath = "//input[@name = 'name']")
+    WebElement titleListField;
+    @FindBy(css = ".js-save-edit")
+    WebElement submitButton;
+    @FindBy (css = ".js-cancel-edit")
+    WebElement cancelEditList;
+    @FindBy (css = ".js-card-details")
+    List<WebElement> cardsList;
+    @FindBy (css = ".open-card-composer")
+    WebElement addNewCard;
+    @FindBy (css = ".js-card-title")
+    WebElement cardTitle;
+    @FindBy (css = ".js-add-card")
+    WebElement submitCard;
+    @FindBy (css = ".js-cancel")
+    WebElement xButton;
+    @FindBy (css = ".js-open-list-menu")
+    WebElement openListMenu;
+    @FindBy (xpath = "//*[@class = 'js-close-list']/..")
+    WebElement deleteListOption;
+
     String boardName;
 
     public CurrentBoardHelper(WebDriver driver, String boardName) {
@@ -22,32 +52,28 @@ public class CurrentBoardHelper extends PageBase{
     }
 
     public void waitUntilPageIsLoaded(){
-        waitUntilElementIsClickable(By.cssSelector(".mod-show-menu"),10);
+        waitUntilElementIsClickable(showMenuIcon,10);
     }
 
     public int getListsQuantity(){
-        return driver.findElements(By.cssSelector(".list-header")).size();
+        return listHeaderLists.size();
     }
 
     public void addNewList(String nameList) {
-        WebElement addListButton = driver.findElement(By.xpath("//span[@class='placeholder']/.."));
         addListButton.click();
-        waitUntilElementIsClickable(By.xpath("//input[@name = 'name']"),10);
-        WebElement titleListField = driver.findElement(By.xpath("//input[@name = 'name']"));
+        waitUntilElementIsClickable(titleListField,10);
         fillField(titleListField,nameList);
-        WebElement submitButton = driver.findElement(By.cssSelector(".js-save-edit"));
         submitButton.click();
-        WebElement cancelEditList = driver.findElement(By.cssSelector(".js-cancel-edit"));
         cancelEditList.click();
-        waitUntilAllElementsArePresent(By.cssSelector(".list-header"),15);
+        waitUntilAllElementsAreVisible(listHeaderLists,10);
     }
 
     public int getCardsQuantity(){
-        return driver.findElements(By.cssSelector(".js-card-details")).size();
+        return cardsList.size();
     }
 
     public String getAddListButtonName(){
-        return driver.findElement(By.xpath("//span[@class='placeholder']")).getText();
+        return addListButton.getText();
     }
 
     public void changeLastListName(String listName) {
@@ -72,40 +98,35 @@ public class CurrentBoardHelper extends PageBase{
     public String getLastListName(){
         int listsQuantity = getListsQuantity();
         if (listsQuantity == 0) return "-- No lists --";
-        else return driver.findElements(By.cssSelector(".list-header")).get(listsQuantity-1).getText();
+        else
+            return listHeaderLists.get(listsQuantity-1).getText();
     }
 
     public void addNewCard() {
         //------ Define "Add Card" button and click it ------
-        waitUntilElementIsClickable(By.cssSelector(".open-card-composer"),10);
-        WebElement addNewCard = driver.findElement(By.cssSelector(".open-card-composer"));
+        waitUntilElementIsClickable(addNewCard,10);
         addNewCard.click();
 
         //-------Define title field of the card and fill in it ----
-        waitUntilElementIsClickable(By.cssSelector(".js-card-title"),10);
-        WebElement cardTitle = driver.findElement(By.cssSelector(".js-card-title"));
+        waitUntilElementIsClickable(cardTitle,10);
         fillField(cardTitle,"new card");
 
         //----- Define 'Add Card' button and click it -----------
-        WebElement submitCard = driver.findElement(By.cssSelector(".js-add-card"));
         submitCard.click();
 
         //------ Click X-button -----------
-        waitUntilElementIsClickable(By.cssSelector(".js-cancel"),10);
-        driver.findElement(By.cssSelector(".js-cancel")).click();
+        waitUntilElementIsClickable(xButton,10);
+        xButton.click();
     }
 
     public void deleteAnyList() {
         // ------ Define openListMenu and click -----------
-        WebElement openListManu = driver.findElement(By.cssSelector(".js-open-list-menu"));
-        openListManu.click();
-
+        openListMenu.click();
         //-------- Wait and click 'Archive List' menu option ----
-        waitUntilElementIsClickable(By.xpath("//*[@class = 'js-close-list']/.."),10);
-        WebElement deleteListOption = driver.findElement(By.xpath("//*[@class = 'js-close-list']/.."));
+        waitUntilElementIsClickable(deleteListOption,10);
         deleteListOption.click();
 
         //------- Wait 'Archive List' option disappears ---------
-        waitUntilElementDisappears(By.xpath("//*[@class = 'js-close-list']/.."),10);
+        waitUntilElementDisappears(deleteListOption,10);
     }
 }

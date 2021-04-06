@@ -6,6 +6,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.util.List;
+
 public class PageBase {
     WebDriver driver;
     public PageBase(WebDriver driver) {
@@ -44,11 +46,27 @@ public class PageBase {
             e.printStackTrace();
         }
     }
+    public void waitUntilElementDisappears(WebElement element, int time) {
+
+        try {
+            new WebDriverWait(driver, time).until(ExpectedConditions.invisibilityOf(element));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     public void waitUntilAllElementsArePresent(By locator, int time) {
 
         try {
             new WebDriverWait(driver, time).until(ExpectedConditions.presenceOfAllElementsLocatedBy(locator));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    public void waitUntilAllElementsAreVisible(List<WebElement> list, int time) {
+
+        try {
+            new WebDriverWait(driver, time).until(ExpectedConditions.visibilityOfAllElements(list));
         } catch (Exception e) {
             e.printStackTrace();
         }

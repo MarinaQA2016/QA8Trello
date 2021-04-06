@@ -3,22 +3,28 @@ package com.company.helpers;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 
 public class UserMenuPanelPage extends PageBase{
+    @FindBy (xpath = "//a[@data-test-id ='header-member-menu-profile']")
+    WebElement profileAndVisibilityMenu;
+    @FindBy (xpath = "//button[@aria-label='Open member menu']")
+    WebElement userMenuButton;
+    @FindBy (xpath = "//nav//span[contains(text(),'@')]")
+    WebElement emailOnMenu;
+
     public UserMenuPanelPage(WebDriver driver) {
         super(driver);
     }
 
     public void waitUntilPageIsLoaded(){
-        waitUntilElementIsClickable(By.xpath("//a[@data-test-id ='header-member-menu-profile']"),10);
+        waitUntilElementIsClickable(profileAndVisibilityMenu,10);
     }
     public void openUserMenu(){
-        WebElement userMenuButton = driver.findElement(By.xpath("//button[@aria-label='Open member menu']"));
         userMenuButton.click();
-        waitUntilElementIsClickable(By.xpath("//a[@data-test-id='header-member-menu-profile']"),10);
+        waitUntilElementIsClickable(profileAndVisibilityMenu,10);
     }
     public String getEmailFromMenu(){
-        WebElement emailOnMenu = driver.findElement(By.xpath("//nav//span[contains(text(),'@')]"));
         return emailOnMenu.getText();
     }
 }

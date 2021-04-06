@@ -1,6 +1,7 @@
 package com.company.tests;
 
 import com.company.helpers.*;
+import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -12,8 +13,8 @@ public class CurrentBoardTests extends TestBase{
 
     @BeforeMethod
     public void initTests()  {
-        loginPage = new LoginPageHelper(driver);
-        boardsPage = new BoardsPageHelper(driver);
+        loginPage = PageFactory.initElements(driver, LoginPageHelper.class);
+        boardsPage = PageFactory.initElements(driver,BoardsPageHelper.class);
         qa8HaifaBoard = new CurrentBoardHelper(driver,"QA Haifa8");
 
         loginPage.openLoginPage();
