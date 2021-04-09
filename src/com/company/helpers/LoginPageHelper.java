@@ -23,34 +23,38 @@ public class LoginPageHelper extends PageBase{
         super(driver);
     }
 
-    public void openLoginPage() {
+    public LoginPageHelper openLoginPage() {
                 logInIcon.click();
+                return this;
     }
 
-    public void waitUntilPageIsLoaded() {
+    public LoginPageHelper waitUntilPageIsLoaded() {
         waitUntilElementIsClickable(loginField,10);
         waitUntilElementIsClickable(loginButton,20);
+        return this;
     }
 
-    public void enterLoginPassNotAttl(String login, String password) {
+    public LoginPageHelper enterLoginPassNotAttl(String login, String password) {
         this.enterLoginNotAttl(login);
         this.enterPasswordNotAttl(password);
         this.clickLoginInButtonNotAttl();
+        return this;
     }
 
-    public void enterLoginPasswordAttl(String login, String password) {
+    public LoginPageHelper enterLoginPasswordAttl(String login, String password) {
         this.enterLoginNotAttl(login);
         this.clickLoginAttl();
         this.enterPasswordAttl(password);
         this.submitAttl();
+        return this;
     }
 
-    public void enterLoginNotAttl(String value) {
+    public LoginPageHelper enterLoginNotAttl(String value) {
         fillField(loginField,value);
-
+        return this;
     }
 
-    public void enterPasswordNotAttl(String value) {
+    public LoginPageHelper enterPasswordNotAttl(String value) {
         waitUntilElementIsClickable(passwordField,10);
         fillField(passwordField,value);
         //to be sure that loginField and passwordField are already filled in
@@ -59,13 +63,13 @@ public class LoginPageHelper extends PageBase{
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-
+        return this;
     }
 
-    public void clickLoginInButtonNotAttl() {
+    public LoginPageHelper clickLoginInButtonNotAttl() {
         waitUntilElementIsClickable(loginButton,20);
         loginButton.click();
-
+        return this;
     }
 
     public String getErrorNotAttlMessage(){
@@ -73,21 +77,24 @@ public class LoginPageHelper extends PageBase{
         return errorMessageNotAttl.getText();
     }
 
-    public void clickLoginAttl() {
+    public LoginPageHelper clickLoginAttl() {
         waitUntilElementIsClickable(loginAsAttlButton,10);
         loginAsAttlButton.click();
+        return this;
     }
 
-    public void enterPasswordAttl(String value) {
+    public LoginPageHelper enterPasswordAttl(String value) {
         waitUntilElementIsClickable(By.id("password"),10);
         WebElement passwordField = driver.findElement(By.id("password"));
         fillField(passwordField,value);
+        return this;
 
     }
 
-    public void submitAttl() {
+    public LoginPageHelper submitAttl() {
         waitUntilElementIsClickable(By.id("login-submit"),10);
         driver.findElement(By.id("login-submit")).click();
+        return this;
     }
 
     public String getErrorAttlMessage() {

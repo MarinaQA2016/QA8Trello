@@ -17,9 +17,9 @@ public class CurrentBoardTests extends TestBase{
         boardsPage = PageFactory.initElements(driver,BoardsPageHelper.class);
         qa8HaifaBoard = new CurrentBoardHelper(driver,"QA Haifa8");
 
-        loginPage.openLoginPage();
-        loginPage.waitUntilPageIsLoaded();
-        loginPage.enterLoginPasswordAttl(LOGIN,PASSWORD);
+        loginPage.openLoginPage()
+                 .waitUntilPageIsLoaded()
+                 .enterLoginPasswordAttl(LOGIN,PASSWORD);
         boardsPage.waitUntilPageIsLoaded();
         qa8HaifaBoard.openCurrentBoardPage();
         qa8HaifaBoard.waitUntilPageIsLoaded();

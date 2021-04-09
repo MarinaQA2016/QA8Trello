@@ -57,8 +57,8 @@ public class LoginTests extends TestBase{
 
     @Test
     public void negativePasswordIncorrect()  {
-        loginPage.enterLoginPasswordAttl(LOGIN,"incorrect");
-        loginPage.getErrorAttlMessage();
+        loginPage.enterLoginPasswordAttl(LOGIN,"incorrect")
+                 .getErrorAttlMessage();
 
         Assert.assertTrue(loginPage.getErrorAttlMessage()
                 .contains("email"));
